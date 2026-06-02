@@ -251,7 +251,7 @@ export function AICoachExperience({ compact = false }: { compact?: boolean }) {
     }
   }
 
-  function useSuggestedPrompt(prompt: string) {
+  function handleSuggestedPrompt(prompt: string) {
     if (!isSignedIn || hasReachedFreeLimit || isReplying) return;
     setInput(prompt);
   }
@@ -351,7 +351,7 @@ export function AICoachExperience({ compact = false }: { compact?: boolean }) {
                 <button
                   key={prompt}
                   type="button"
-                  onClick={() => useSuggestedPrompt(prompt)}
+                  onClick={() => handleSuggestedPrompt(prompt)}
                   className="rounded-[8px] border border-ink/10 bg-white px-3 py-3 text-left text-sm leading-5 text-ink/72 transition hover:border-sage/30 hover:text-ink"
                 >
                   {prompt}
