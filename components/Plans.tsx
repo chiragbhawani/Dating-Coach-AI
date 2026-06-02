@@ -8,7 +8,7 @@ const plans = [
     description: "Start with calm, safety-first dating support.",
     features: [
       "Basic relationship guidance",
-      "Limited AI coach access when launched",
+      "5 AI messages per day",
       "Safety-first advice resources"
     ]
   },
@@ -19,7 +19,7 @@ const plans = [
     description: "More structure for people actively improving how they date.",
     features: [
       "Everything in Free",
-      "Full AI coach access when launched",
+      "Unlimited AI messages",
       "Saved advice history",
       "Priority feature access"
     ],
@@ -32,6 +32,7 @@ const plans = [
     description: "A high-touch plan for deeper reflection and personal growth.",
     features: [
       "Everything in Pro",
+      "Unlimited AI messages",
       "Human coach support when available",
       "Priority response workflows",
       "Advanced personal guidance tools"
@@ -104,7 +105,7 @@ export function Plans() {
                   ))}
                 </ul>
                 <a
-                  href="#coming-soon"
+                  href="#ai-coach"
                   className={`mt-8 inline-flex w-full items-center justify-center rounded-[8px] px-4 py-3 font-semibold transition focus:outline-none focus:ring-2 focus:ring-sage focus:ring-offset-2 ${
                     plan.featured
                       ? "bg-sage text-white hover:bg-ink"

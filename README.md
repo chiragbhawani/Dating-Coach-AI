@@ -4,11 +4,11 @@ A modern responsive landing page for an AI-powered dating coach startup, built w
 
 ## What Is Included
 
-- Premium landing page with hero, coming-soon AI coach section, INR pricing, success stories, trust/safety, and footer
+- Premium landing page with hero, AI Dating Coach section, INR pricing, success stories, trust/safety, and footer
 - Clerk-powered sign in, sign up, and user profile button
 - Protected `/dashboard` page with account and coaching feature cards
-- No active AI chat route in this version
-- Comments in the code showing where the AI coach integration can be added later
+- Dedicated `/coach` page with a real Gemini-powered chat interface
+- Server-side `/api/coach` route with free daily message limits and plan-aware TODOs
 
 ## Local Setup
 
@@ -27,9 +27,11 @@ NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
 NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
 NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL=/dashboard
 NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL=/dashboard
+GEMINI_API_KEY=your_gemini_api_key
+GEMINI_MODEL=gemini-2.5-flash
 ```
 
-You can copy `.env.example` as a starting point. Get the keys from your Clerk dashboard.
+You can copy `.env.example` as a starting point. Get Clerk keys from your Clerk dashboard and a Gemini key from Google AI Studio. Keep `GEMINI_API_KEY` server-side only.
 
 Run the development server:
 
@@ -61,6 +63,8 @@ NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
 NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
 NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL=/dashboard
 NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL=/dashboard
+GEMINI_API_KEY=your_production_gemini_api_key
+GEMINI_MODEL=gemini-2.5-flash
 ```
 
 5. Deploy the project.
@@ -71,15 +75,16 @@ NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL=/dashboard
 - The marketing site is public.
 - `/dashboard` is protected by `middleware.ts`.
 - Signed-out visitors are redirected to Clerk sign-in when they open `/dashboard`.
+- `/coach` is public to view, but the chat input requires a signed-in user.
 
-## Future AI Coach Integration
+## AI Coach Notes
 
-The live AI coach is still coming soon. The backend team can later add:
+The live AI coach uses Gemini through the server-side `/api/coach` route.
 
-- Server-side coaching route
-- AI provider integration
-- Safety policies
-- Message persistence
-- Saved advice and plan-aware usage limits
+- Signed-out users cannot chat and are prompted to sign in.
+- Free users get 5 AI messages per day.
+- Pro and Premium users are structured for unlimited AI messages.
+- Plan checks currently read Clerk metadata keys such as `plan` or `subscriptionPlan`.
+- Usage tracking is behind a small storage abstraction. The current memory store is temporary and should move to Supabase, PostgreSQL, Neon, or Clerk metadata before production billing.
 
 Keep model API keys server-side only. Do not expose them in frontend code.

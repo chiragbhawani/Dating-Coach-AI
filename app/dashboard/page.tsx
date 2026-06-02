@@ -11,8 +11,8 @@ import {
 const dashboardCards = [
   {
     icon: Bot,
-    title: "AI Coach Coming Soon",
-    text: "The backend/Replit AI team can connect the live coach here later."
+    title: "AI Dating Coach",
+    text: "Open your coaching workspace for conversation help, boundaries, and confidence."
   },
   {
     icon: Crown,
@@ -48,7 +48,7 @@ export default async function DashboardPage() {
             </h1>
             <p className="mt-3 text-ink/62">
               Welcome{user?.firstName ? `, ${user.firstName}` : ""}. Your
-              coaching workspace is being prepared.
+              coaching workspace is ready.
             </p>
           </div>
           <div className="flex items-center gap-2 border border-ink/10 bg-white px-4 py-3 text-sm text-ink/70">
@@ -76,19 +76,18 @@ export default async function DashboardPage() {
         </section>
 
         <section className="mt-8 border border-sage/20 bg-mist p-6">
-          <h2 className="text-xl font-semibold text-ink">Integration note</h2>
+          <h2 className="text-xl font-semibold text-ink">Account note</h2>
           <p className="mt-3 max-w-3xl leading-7 text-ink/68">
-            Your account area is ready for upcoming coaching features. Message
-            history, plan syncing, and human coach workflows can be added here
-            once backend services are ready. Current Clerk user ID:
+            Your account area is ready for coaching features. Message history,
+            plan syncing, and human coach workflows can connect here as the
+            product grows. Current Clerk user ID:
             <span className="font-mono text-sm text-sage"> {userId}</span>.
           </p>
         </section>
 
-        {/* Future chatbot integration point:
-            Mount authenticated AI coach widgets here after the backend/Replit
-            AI team provides the server route, persistence, safety policies,
-            and production environment configuration. */}
+        {/* TODO: Check subscription plan from Clerk metadata or a database.
+            Free = 5 AI messages per day.
+            Pro/Premium = allow unlimited AI access. */}
       </div>
     </main>
   );

@@ -9,7 +9,7 @@ import { ArrowRight, Sparkles } from "lucide-react";
 
 const navLinks = [
   { label: "What it does", href: "#features" },
-  { label: "AI Coach", href: "#coming-soon" },
+  { label: "AI Coach", href: "#ai-coach" },
   { label: "Plans", href: "#plans" },
   { label: "How it works", href: "#how-it-works" },
   { label: "Trust", href: "#trust" }

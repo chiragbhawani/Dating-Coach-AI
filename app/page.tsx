@@ -1,4 +1,4 @@
-import { AICoachComingSoon } from "@/components/AICoachComingSoon";
+import { AIDatingCoach } from "@/components/AIDatingCoach";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
 import { HowItWorks } from "@/components/HowItWorks";
@@ -15,7 +15,7 @@ export default function Home() {
       <main>
         <Hero />
         <WhatItDoes />
-        <AICoachComingSoon />
+        <AIDatingCoach />
         <Plans />
         <HowItWorks />
         <Testimonials />
