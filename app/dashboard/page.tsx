@@ -4,7 +4,6 @@ import {
   Bot,
   BookmarkCheck,
   Crown,
-  HeartHandshake,
   LockKeyhole
 } from "lucide-react";
 
@@ -24,16 +23,13 @@ const dashboardCards = [
     title: "Saved Advice",
     text: "Future home for saved prompts, notes, and coaching history."
   },
-  {
-    icon: HeartHandshake,
-    title: "Human Coach Access",
-    text: "A dedicated space for higher-touch support as coaching options become available."
-  }
 ];
 
 export default async function DashboardPage() {
   const { userId } = await auth();
   const user = await currentUser();
+  const plan =
+  (user?.publicMetadata?.plan as string | undefined) ?? "free";
 
   return (
     <main className="min-h-screen bg-[#fbfaf7]">
@@ -56,6 +52,31 @@ export default async function DashboardPage() {
             Protected account area
           </div>
         </header>
+
+<section className="mt-8 border border-sage/20 bg-white p-6">
+  <h2 className="text-2xl font-semibold text-ink">
+    Current Plan
+  </h2>
+
+  <p className="mt-3 text-lg">
+    {plan === "pro" ? "Pro Member" : "Free Plan"}
+  </p>
+
+  <p className="mt-2 text-ink/70">
+    {plan === "pro"
+      ? "Unlimited AI coaching messages."
+      : "5 AI coaching messages per day."}
+  </p>
+
+  {plan !== "pro" && (
+    <Link
+      href="/upgrade"
+      className="mt-5 inline-block bg-sage px-5 py-3 text-white"
+    >
+      Upgrade to Pro
+    </Link>
+  )}
+</section> 
 
         <section className="mt-10 grid gap-4 md:grid-cols-2">
           {dashboardCards.map((card) => {
@@ -85,9 +106,17 @@ export default async function DashboardPage() {
           </p>
         </section>
 
-        {/* TODO: Check subscription plan from Clerk metadata or a database.
-            Free = 5 AI messages per day.
-            Pro/Premium = allow unlimited AI access. */}
+        {/* TODO:
+   Read plan from Clerk metadata.
+
+   Free:
+   - 5 AI messages per day
+
+   Pro:
+   - Unlimited AI messages
+   - Personalized AI coach
+   - Future memory features
+*/}
       </div>
     </main>
   );
