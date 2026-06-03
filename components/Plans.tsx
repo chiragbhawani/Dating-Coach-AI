@@ -1,4 +1,4 @@
-import { Check, Crown, Gem, Sparkle } from "lucide-react";
+import { Check, Crown, Sparkle } from "lucide-react";
 
 const plans = [
   {
@@ -14,30 +14,18 @@ const plans = [
   },
   {
     name: "Pro",
-    price: "₹299",
+    price: "₹249",
     icon: Crown,
     description: "More structure for people actively improving how they date.",
     features: [
       "Everything in Free",
       "Unlimited AI messages",
-      "Saved advice history",
-      "Priority feature access"
+      "Personalized AI coaching",
+      "Conversation memory",
+      "Saved advice history"
     ],
     featured: true
   },
-  {
-    name: "Premium",
-    price: "₹999",
-    icon: Gem,
-    description: "A high-touch plan for deeper reflection and personal growth.",
-    features: [
-      "Everything in Pro",
-      "Unlimited AI messages",
-      "Human coach support when available",
-      "Priority response workflows",
-      "Advanced personal guidance tools"
-    ]
-  }
 ];
 
 export function Plans() {
@@ -59,7 +47,7 @@ export function Plans() {
           </p>
         </div>
 
-        <div className="mt-10 grid gap-4 md:grid-cols-3">
+        <div className="mt-10 grid gap-4 md:grid-cols-2">
           {plans.map((plan) => {
             const Icon = plan.icon;
 

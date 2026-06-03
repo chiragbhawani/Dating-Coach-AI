@@ -42,9 +42,9 @@ const FREE_DAILY_MESSAGE_LIMIT = 5;
 
 const suggestedPrompts = [
   "How do I start a conversation with someone I like?",
-  "I got left on read. What should I do?",
-  "I feel nervous talking to new people.",
-  "How can I build confidence?"
+  "How do I become more confident?",
+  "What should I do if I got left on read?",
+  "How do I handle rejection?"
 ];
 
 const starterMessages: CoachMessage[] = [
@@ -95,16 +95,20 @@ function getPlanType(user: ClerkPlanUser): PlanType {
 }
 
 function renderMessageContent(content: string) {
-  return content.split(/\n{2,}/).map((paragraph) => (
-    <p key={paragraph} className="mb-3 last:mb-0">
-      {paragraph.split("\n").map((line, index) => (
-        <span key={`${line}-${index}`}>
-          {line}
-          {index < paragraph.split("\n").length - 1 ? <br /> : null}
-        </span>
-      ))}
-    </p>
-  ));
+  return content.split(/\n{2,}/).map((paragraph) => {
+    const lines = paragraph.split("\n");
+
+    return (
+      <p key={paragraph} className="mb-3 last:mb-0">
+        {lines.map((line, index) => (
+          <span key={`${line}-${index}`}>
+            {line}
+            {index < lines.length - 1 ? <br /> : null}
+          </span>
+        ))}
+      </p>
+    );
+  });
 }
 
 export function AICoachExperience({ compact = false }: { compact?: boolean }) {
@@ -127,6 +131,7 @@ export function AICoachExperience({ compact = false }: { compact?: boolean }) {
     : remainingMessageCount;
   const hasReachedFreeLimit = !hasUnlimitedMessages && remainingMessages === 0;
   const hasUserConversation = messages.length > starterMessages.length;
+  const firstName = user?.firstName;
 
   const usageLabel = useMemo(() => {
     if (!isSignedIn) return "Sign in to access your coaching messages";
@@ -256,6 +261,10 @@ export function AICoachExperience({ compact = false }: { compact?: boolean }) {
     setInput(prompt);
   }
 
+  // TODO: Persist future session history so returning users can resume prior coaching threads.
+  // TODO: Add future coaching memory for user goals, communication preferences, and recurring situations.
+  // TODO: Replace temporary subscription checks with production plan data when paid plans are implemented.
+
   return (
     <div className="rounded-[8px] border border-white/14 bg-white/[0.08] p-2 shadow-soft backdrop-blur sm:p-4">
       <div className="rounded-[8px] border border-ink/10 bg-[#fbfaf7] p-4 text-ink shadow-sm sm:p-5">
@@ -266,7 +275,11 @@ export function AICoachExperience({ compact = false }: { compact?: boolean }) {
             </div>
             <div>
               <h3 className="font-semibold">AI Dating Coach</h3>
-              <p className="text-sm text-ink/58">{usageLabel}</p>
+              <p className="text-sm text-ink/58">
+                {isSignedIn && firstName
+                  ? `Welcome back, ${firstName}. ${usageLabel}`
+                  : usageLabel}
+              </p>
             </div>
           </div>
           <div className="flex flex-wrap gap-2">
