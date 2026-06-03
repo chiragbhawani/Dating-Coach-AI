@@ -20,8 +20,8 @@ const dashboardCards = [
   },
   {
     icon: BookmarkCheck,
-    title: "Saved Advice",
-    text: "Future home for saved prompts, notes, and coaching history."
+    title: "Coaching History",
+    text: "Review past coaching conversations and saved insights."
   },
 ];
 
@@ -96,15 +96,21 @@ export default async function DashboardPage() {
           })}
         </section>
 
-        <section className="mt-8 border border-sage/20 bg-mist p-6">
-          <h2 className="text-xl font-semibold text-ink">Account note</h2>
-          <p className="mt-3 max-w-3xl leading-7 text-ink/68">
-            Your account area is ready for coaching features. Message history,
-            plan syncing, and human coach workflows can connect here as the
-            product grows. Current Clerk user ID:
-            <span className="font-mono text-sm text-sage"> {userId}</span>.
-          </p>
-        </section>
+       <section className="mt-8 border border-sage/20 bg-mist p-6">
+  <h2 className="text-xl font-semibold text-ink">
+    Your Coaching Journey
+  </h2>
+
+  <p className="mt-3 max-w-3xl leading-7 text-ink/68">
+    Use your AI coach whenever you need help with conversations,
+    confidence, relationships, boundaries, or dating situations.
+  </p>
+
+  <p className="mt-3 max-w-3xl leading-7 text-ink/68">
+    New features such as conversation memory, saved coaching insights,
+    and personalized guidance will appear here as they become available.
+  </p>
+</section>
 
         {/* TODO:
    Read plan from Clerk metadata.
