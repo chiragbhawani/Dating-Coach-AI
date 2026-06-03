@@ -93,15 +93,15 @@ export function Plans() {
                   ))}
                 </ul>
                 <a
-                  href="#ai-coach"
-                  className={`mt-8 inline-flex w-full items-center justify-center rounded-[8px] px-4 py-3 font-semibold transition focus:outline-none focus:ring-2 focus:ring-sage focus:ring-offset-2 ${
-                    plan.featured
-                      ? "bg-sage text-white hover:bg-ink"
-                      : "border border-ink/12 text-ink hover:bg-mist"
-                  }`}
-                >
-                  Choose {plan.name}
-                </a>
+  href={plan.name === "Pro" ? "/upgrade" : "/coach"}
+  className={`mt-8 inline-flex w-full items-center justify-center rounded-[8px] px-4 py-3 font-semibold transition focus:outline-none focus:ring-2 focus:ring-sage focus:ring-offset-2 ${
+    plan.featured
+      ? "bg-sage text-white hover:bg-ink"
+      : "border border-ink/12 text-ink hover:bg-mist"
+  }`}
+>
+  {plan.name === "Pro" ? "Upgrade to Pro" : "Start Free"}
+</a>
               </article>
             );
           })}
