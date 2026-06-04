@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
+import { saveMessage } from "@/lib/chat-memory";
 import { DATING_COACH_SYSTEM_PROMPT } from "@/lib/coach/coach-prompt";
 import {
   FREE_DAILY_MESSAGE_LIMIT,
@@ -142,6 +143,16 @@ export async function POST(request: NextRequest) {
         message.content.trim().length > 0
     ) ?? [];
 
+    const latestUserMessage = messages[messages.length - 1];
+
+if (latestUserMessage?.role === "user") {
+  await saveMessage(
+    userId,
+    "user",
+    latestUserMessage.content
+  );
+}
+
   if (messages.length === 0) {
     return errorResponse("Send a dating question to start coaching.", 400);
   }
@@ -186,6 +197,12 @@ export async function POST(request: NextRequest) {
       502
     );
   }
+
+  await saveMessage(
+  userId,
+  "assistant",
+  reply
+);
 
   const nextUsage = hasUnlimitedMessages
     ? usage

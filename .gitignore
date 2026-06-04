@@ -5,3 +5,5 @@ tsconfig.tsbuildinfo
 dist/
 out/
 npm-debug.log*
+
+/lib/generated/prisma

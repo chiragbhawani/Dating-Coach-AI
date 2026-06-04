@@ -26,7 +26,6 @@ const dashboardCards = [
 ];
 
 export default async function DashboardPage() {
-  const { userId } = await auth();
   const user = await currentUser();
   const plan =
   (user?.publicMetadata?.plan as string | undefined) ?? "free";
